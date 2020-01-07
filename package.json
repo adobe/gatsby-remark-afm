@@ -17,5 +17,8 @@
     "remark"
   ],
   "author": "",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "unist-util-visit": "^2.0.1"
+  }
 }
