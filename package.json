@@ -4,7 +4,7 @@
   "description": "Adobe Flavoured Markdown plugin for gatsby-transformer-remark",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "homepage": "https://git.corp.adobe.com/devrel/gatsby-remark-afm#readme",
   "repository": {
@@ -24,5 +24,10 @@
   "dependencies": {
     "mdast-util-to-string": "^1.0.7",
     "unist-util-visit": "^2.0.1"
+  },
+  "devDependencies": {
+    "cross-env": "^6.0.3",
+    "jest": "^24.9.0",
+    "remark": "^11.0.2"
   }
 }
