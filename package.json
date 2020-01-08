@@ -11,6 +11,9 @@
     "type": "git",
     "url": "git@git.corp.adobe.com:devrel/gatsby-remark-afm.git"
   },
+  "publishConfig": {
+    "registry": "https://artifactory.corp.adobe.com/artifactory/api/npm/npm-adobe-release/"
+  },
   "keywords": [
     "gatsby",
     "gatsby-plugin",
