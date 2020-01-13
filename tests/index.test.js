@@ -1,9 +1,11 @@
 const doNotLocalize = require("../src/DoNotLocalize");
+const admonitions = require("../src/Admonitions");
 const {
   getMarkdownASTForFile,
   parseASTToMarkdown
 } = require("./helpers/markdown");
 const plugin = require("../index");
+const fs = require("fs");
 
 describe("doNotLocalize", () => {
   it("is truthy", () => {
@@ -18,6 +20,76 @@ describe("doNotLocalize", () => {
       For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
 
       Adobe
+      "
+    `);
+  });
+});
+
+describe("admonitions", () => {
+  it("is truthy", () => {
+    expect(admonitions).toBeTruthy();
+  });
+  it("can transform !Note tags", async () => {
+    const markdownAST = getMarkdownASTForFile("admonitions-note", true);
+    const processedAST = await plugin({ markdownAST });
+    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
+      "# Don't Delete:
+
+      For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
+
+      <Alert header=\\"Note\\" variant=\\"info\\">This is a standard NOTE block.</Alert>
+      "
+    `);
+  });
+  it("can transform !Caution tags", async () => {
+    const markdownAST = getMarkdownASTForFile("admonitions-caution", true);
+    const processedAST = await plugin({ markdownAST });
+    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
+      "# Don't Delete:
+
+      For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
+
+      <Alert header=\\"Caution\\" variant=\\"error\\">This is a standard CAUTION block.</Alert>
+      "
+    `);
+  });
+  it("can transform !Warning tags", async () => {
+    const markdownAST = getMarkdownASTForFile("admonitions-warning", true);
+    const processedAST = await plugin({ markdownAST });
+    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
+      "# Don't Delete:
+
+      For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
+
+      <Alert header=\\"Warning\\" variant=\\"warning\\">This is a standard WARNING block.</Alert>
+      "
+    `);
+  });
+  it("can transform !Tip tags", async () => {
+    const markdownAST = getMarkdownASTForFile("admonitions-tip", true);
+    const processedAST = await plugin({ markdownAST });
+    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
+      "# Don't Delete:
+
+      For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
+
+      <Alert header=\\"Tip\\" variant=\\"help\\">This is a standard TIP block.</Alert>
+      "
+    `);
+  });
+  it("can transform multi-line tags", async () => {
+    const markdownAST = getMarkdownASTForFile("admonitions-multiline", true);
+    const processedAST = await plugin({ markdownAST });
+    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
+      "# Don't Delete:
+
+      For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
+
+      <Alert header=\\"Warning\\" variant=\\"warning\\">This is a standard WARNING block.
+      It goes on for a few lines.
+      Then we finish with some more text.</Alert>
+
+      Like So
       "
     `);
   });
