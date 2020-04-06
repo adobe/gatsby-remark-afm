@@ -1,11 +1,31 @@
 const doNotLocalize = require("../src/DoNotLocalize");
 const admonitions = require("../src/Admonitions");
+const includeRelative = require("../src/IncludeRelative");
 const {
   getMarkdownASTForFile,
-  parseASTToMarkdown
+  parseASTToMarkdown,
 } = require("./helpers/markdown");
 const plugin = require("../index");
 const fs = require("fs");
+
+describe("includeRelative", () => {
+  it("is truthy", () => {
+    expect(includeRelative).toBeTruthy();
+  });
+  it("can detect includeRelative", async () => {
+    const markdownAST = getMarkdownASTForFile("include-relative", true);
+    const processedAST = await plugin({ markdownAST });
+    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
+      "before
+
+      more text
+
+      <div><IncludeMarkdown file=\\"include-me.md\\"/ >
+      after</div>
+      "
+    `);
+  });
+});
 
 describe("doNotLocalize", () => {
   it("is truthy", () => {
