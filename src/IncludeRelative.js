@@ -24,7 +24,7 @@ function includeRelative(markdownAST) {
           }
         }
       }
-    } else if (node.children.length > 1) {
+    } else if (node.children.length > 1 && node.children[0].value) {
       const matches = node.children[0].value.match(/{%\s*include/g);
       if (matches && matches.length > 0) {
         let text = "";
