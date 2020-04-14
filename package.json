@@ -22,7 +22,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "mdast-util-to-string": "^1.0.7",
+    "mdast-util-to-string": "^1.1.0",
     "unist-util-visit": "^2.0.1"
   },
   "devDependencies": {

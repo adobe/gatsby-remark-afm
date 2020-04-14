@@ -3,7 +3,7 @@ const admonitions = require("../src/Admonitions");
 const includeRelative = require("../src/IncludeRelative");
 const {
   getMarkdownASTForFile,
-  parseASTToMarkdown,
+  parseASTToMarkdown
 } = require("./helpers/markdown");
 const plugin = require("../index");
 const fs = require("fs");
@@ -22,6 +22,30 @@ describe("includeRelative", () => {
 
       <div><IncludeMarkdown file=\\"include-me.md\\"/ >
       after</div>
+      "
+    `);
+  });
+  it("can detect includeRelative (only includes)", async () => {
+    const markdownAST = getMarkdownASTForFile("aepcs-api-reference", true);
+    const processedAST = await plugin({ markdownAST });
+    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
+      "<div><IncludeMarkdown file=\\"static/acppath_delete_asset_top.md\\"/ ></div>
+
+      <div><IncludeMarkdown file=\\"auto-generated/acppath_delete_asset_params.md\\"/ ></div>
+
+      <div><IncludeMarkdown file=\\"static/acppath_delete_asset_bottom.md\\"/ ></div>
+      "
+    `);
+  });
+  it("can detect includeRelative after gatsby-transform-remark", async () => {
+    const markdownAST = require("../tests/fixtures/acpcs-api-reference");
+    const processedAST = await plugin({ markdownAST });
+    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
+      "<div><IncludeMarkdown file=\\"static/acppath_delete_using_repometadata_top.md\\"/ ></div>
+
+      <div><IncludeMarkdown file=\\"auto-generated/acppath_delete_using_repometadata_params.md\\"/ ></div>
+
+      <div><IncludeMarkdown file=\\"static/acppath_delete_using_repometadata_bottom.md\\"/ ></div>
       "
     `);
   });
