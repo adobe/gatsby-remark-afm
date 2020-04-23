@@ -3,7 +3,7 @@ const admonitions = require("../src/Admonitions");
 const includeRelative = require("../src/IncludeRelative");
 const {
   getMarkdownASTForFile,
-  parseASTToMarkdown
+  parseASTToMarkdown,
 } = require("./helpers/markdown");
 const plugin = require("../index");
 const fs = require("fs");
@@ -134,6 +134,18 @@ describe("admonitions", () => {
       Then we finish with some more text.</Alert>
 
       Like So
+      "
+    `);
+  });
+  it("can transform tags with embedded urls", async () => {
+    const markdownAST = getMarkdownASTForFile("admonitions-url", true);
+    const processedAST = await plugin({ markdownAST });
+    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
+      "# Don't Delete:
+
+      For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
+
+      <Alert header=\\"Warning\\" variant=\\"warning\\">Before <a href=\\"https://example.com\\">website</a> After</Alert>
       "
     `);
   });
