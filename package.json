@@ -1,6 +1,6 @@
 {
   "name": "@parliament/gatsby-remark-afm",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Adobe Flavoured Markdown plugin for gatsby-transformer-remark",
   "main": "index.js",
   "scripts": {
