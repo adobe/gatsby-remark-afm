@@ -137,6 +137,20 @@ describe("admonitions", () => {
       "
     `);
   });
+  it("can transform inline tags", async () => {
+    const markdownAST = getMarkdownASTForFile("admonitions-inline", true);
+    const processedAST = await plugin({ markdownAST });
+    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
+      "# Don't Delete:
+
+      For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
+
+      <Alert header=\\"Note\\" variant=\\"info\\"> Only a user with sufficient rights can create a property. See <a href=\\"user-permissions.md\\">User Management</a>.</Alert>
+
+      Like So
+      "
+    `);
+  });
   it("can transform tags with embedded urls", async () => {
     const markdownAST = getMarkdownASTForFile("admonitions-url", true);
     const processedAST = await plugin({ markdownAST });

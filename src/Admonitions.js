@@ -27,14 +27,25 @@ function admonitions(markdownAST) {
       }
 
       if (html) {
-        for (let i = 0; i < children[1].children.length; i++) {
-          if (children[1].children[i].type === "link") {
-            html = `${html}<a href="${children[1].children[i].url}">${children[1].children[i].children[0].value}</a>`;
-          } else {
-            html = `${html}${children[1].children[i].value}`;
+        if (children[1]) {
+          for (let i = 0; i < children[1].children.length; i++) {
+            if (children[1].children[i].type === "link") {
+              html = `${html}<a href="${children[1].children[i].url}">${children[1].children[i].children[0].value}</a>`;
+            } else {
+              html = `${html}${children[1].children[i].value}`;
+            }
           }
+          html = `${html}</Alert>`;
+        } else if (children[0].children[1]) {
+          for (let i = 1; i < children[0].children.length; i++) {
+            if (children[0].children[i].type === "link") {
+              html = `${html}<a href="${children[0].children[i].url}">${children[0].children[i].children[0].value}</a>`;
+            } else {
+              html = `${html}${children[0].children[i].value}`;
+            }
+          }
+          html = `${html}</Alert>`;
         }
-        html = `${html}</Alert>`;
 
         node.type = "html";
         node.children = undefined;
