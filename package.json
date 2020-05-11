@@ -1,6 +1,6 @@
 {
   "name": "@parliament/gatsby-remark-afm",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Adobe Flavoured Markdown plugin for gatsby-transformer-remark",
   "main": "index.js",
   "scripts": {
@@ -23,6 +23,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "mdast-util-to-string": "^1.1.0",
+    "unist-util-remove": "^2.0.0",
     "unist-util-visit": "^2.0.1"
   },
   "devDependencies": {
