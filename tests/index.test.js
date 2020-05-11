@@ -1,6 +1,7 @@
 const doNotLocalize = require("../src/DoNotLocalize");
 const admonitions = require("../src/Admonitions");
 const includeRelative = require("../src/IncludeRelative");
+const tabbedCodeBlocks = require("../src/TabbedCodeBlocks");
 const {
   getMarkdownASTForFile,
   parseASTToMarkdown,
@@ -160,6 +161,81 @@ describe("admonitions", () => {
       For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
 
       <Alert header=\\"Warning\\" variant=\\"warning\\">Before <a href=\\"https://example.com\\">website</a> After</Alert>
+      "
+    `);
+  });
+});
+
+describe("tabbedCodeBlocks", () => {
+  it("is truthy", () => {
+    expect(tabbedCodeBlocks).toBeTruthy();
+  });
+  it("can convert multiple code blocks into tabs", async () => {
+    const markdownAST = getMarkdownASTForFile("tabbed-code-blocks", true);
+    const processedAST = await plugin({ markdownAST });
+    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
+      "# Tabbed code blocks
+
+      Some Code
+
+      <TabView
+              orientation=\\"horizontal\\"
+            >
+            <Tab
+                disabled={false}
+                icon={undefined}
+                invalid={false}
+                renderChildren
+                selected={false}
+                tabIndex={0}
+                label=\\"json\\"
+              >
+                {
+        \\"op\\": \\"copy\\",
+        \\"target\\": {
+          \\"path\\": \\"/content/assets/7d391c3c-a3d4-4f66-81ce-40066732db60/target\\"
+        },
+        \\"source\\": {
+          \\"path\\": \\"/content/assets/7d391c3c-a3d4-4f66-81ce-40066732db60/source/test.psd\\"
+        }
+      }
+              </Tab>
+              <Tab
+                disabled={false}
+                icon={undefined}
+                invalid={false}
+                renderChildren
+                selected={false}
+                tabIndex={0}
+                label=\\"json\\"
+              >
+                {
+        \\"op\\": \\"copy\\",
+        \\"target\\": {
+          \\"path\\": \\"/content/assets/7d391c3c-a3d4-4f66-81ce-40066732db60/target/test.psd\\"
+        },
+        \\"source\\": {
+          \\"path\\": \\"/content/assets/7d391c3c-a3d4-4f66-81ce-40066732db60/source/test.psd\\"
+        }
+      }
+              </Tab>
+              </TabView>
+
+      \`\`\`json tab-group='hello-world-snippets' tab-name='ruby'
+      remove
+      \`\`\`
+
+      \`\`\`json
+      {
+        \\"op\\": \\"copy\\",
+        \\"target\\": {
+          \\"path\\": \\"/content/assets/7d391c3c-a3d4-4f66-81ce-40066732db60/target/test.psd\\"
+        },
+        \\"source\\": {
+          \\"path\\": \\"/content/assets/7d391c3c-a3d4-4f66-81ce-40066732db60/source/test.psd\\"
+        }
+      }
+      \`\`\`
       "
     `);
   });
