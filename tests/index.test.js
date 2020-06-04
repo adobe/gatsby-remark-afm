@@ -2,6 +2,7 @@ const doNotLocalize = require("../src/DoNotLocalize");
 const admonitions = require("../src/Admonitions");
 const includeRelative = require("../src/IncludeRelative");
 const tabbedCodeBlocks = require("../src/TabbedCodeBlocks");
+const spectrumHeading = require("../src/SpectrumHeading");
 const {
   getMarkdownASTForFile,
   parseASTToMarkdown,
@@ -60,7 +61,7 @@ describe("doNotLocalize", () => {
     const markdownAST = getMarkdownASTForFile("do-not-localize", true);
     const processedAST = await plugin({ markdownAST });
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
-      "# Don't Delete:
+      "<Heading>Don't Delete:</Heading>
 
       For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
 
@@ -78,7 +79,7 @@ describe("admonitions", () => {
     const markdownAST = getMarkdownASTForFile("admonitions-note", true);
     const processedAST = await plugin({ markdownAST });
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
-      "# Don't Delete:
+      "<Heading>Don't Delete:</Heading>
 
       For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
 
@@ -90,7 +91,7 @@ describe("admonitions", () => {
     const markdownAST = getMarkdownASTForFile("admonitions-caution", true);
     const processedAST = await plugin({ markdownAST });
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
-      "# Don't Delete:
+      "<Heading>Don't Delete:</Heading>
 
       For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
 
@@ -102,7 +103,7 @@ describe("admonitions", () => {
     const markdownAST = getMarkdownASTForFile("admonitions-warning", true);
     const processedAST = await plugin({ markdownAST });
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
-      "# Don't Delete:
+      "<Heading>Don't Delete:</Heading>
 
       For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
 
@@ -114,7 +115,7 @@ describe("admonitions", () => {
     const markdownAST = getMarkdownASTForFile("admonitions-tip", true);
     const processedAST = await plugin({ markdownAST });
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
-      "# Don't Delete:
+      "<Heading>Don't Delete:</Heading>
 
       For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
 
@@ -126,7 +127,7 @@ describe("admonitions", () => {
     const markdownAST = getMarkdownASTForFile("admonitions-multiline", true);
     const processedAST = await plugin({ markdownAST });
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
-      "# Don't Delete:
+      "<Heading>Don't Delete:</Heading>
 
       For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
 
@@ -142,7 +143,7 @@ describe("admonitions", () => {
     const markdownAST = getMarkdownASTForFile("admonitions-inline", true);
     const processedAST = await plugin({ markdownAST });
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
-      "# Don't Delete:
+      "<Heading>Don't Delete:</Heading>
 
       For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
 
@@ -156,7 +157,7 @@ describe("admonitions", () => {
     const markdownAST = getMarkdownASTForFile("admonitions-url", true);
     const processedAST = await plugin({ markdownAST });
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
-      "# Don't Delete:
+      "<Heading>Don't Delete:</Heading>
 
       For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
 
@@ -174,7 +175,7 @@ describe("tabbedCodeBlocks", () => {
     const markdownAST = getMarkdownASTForFile("tabbed-code-blocks", true);
     const processedAST = await plugin({ markdownAST });
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
-      "# Tabbed code blocks
+      "<Heading>Tabbed code blocks</Heading>
 
       Some Code
 
@@ -236,6 +237,38 @@ describe("tabbedCodeBlocks", () => {
         }
       }
       \`\`\`
+      "
+    `);
+  });
+});
+
+describe("spectrumHeading", () => {
+  it("is truthy", () => {
+    expect(spectrumHeading).toBeTruthy();
+  });
+  it("can convert multiple code blocks into tabs", async () => {
+    const markdownAST = getMarkdownASTForFile("headers", true);
+    const processedAST = await plugin({ markdownAST });
+    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
+      "<Heading>Heading One</Heading>
+
+      then some text
+
+      <Heading variant=\\"pageTitle\\">Heading Two</Heading>
+
+      more text
+
+      <Heading variant=\\"subtitle1\\">Heading Three</Heading>
+
+      This is getting silly
+
+      <Heading variant=\\"subtitle2\\">Heading Four</Heading>
+
+      I mean are we done yet?
+
+      <Heading variant=\\"subtitle3\\">Heading Five</Heading>
+
+      Yes, we are.
       "
     `);
   });
