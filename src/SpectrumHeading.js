@@ -21,7 +21,8 @@ function calculateVariant(depth) {
 function createHeading(node) {
   let text = node.children
     .reduce(
-      (accumulator, currentValue) => accumulator + " " + currentValue.value,
+      (accumulator, currentValue) =>
+        accumulator + " " + (currentValue.value ? currentValue.value : ""),
       ""
     )
     .trim();
