@@ -32,3 +32,7 @@ Add following to your `gatsby-config.js`:
 ## License
 
 [Apache-2.0](LICENSE)
+
+## Contributing
+
+Contributions are welcomed! Read the [Contributing Guide](./.github/CONTRIBUTING.md) for more information.
