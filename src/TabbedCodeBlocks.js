@@ -10,8 +10,6 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 const visit = require("unist-util-visit");
-const remove = require("unist-util-remove");
-const toString = require("mdast-util-to-string");
 
 function tabbedCodeBlocks(markdownAST) {
   // console.log(JSON.stringify(markdownAST));
