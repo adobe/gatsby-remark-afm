@@ -1,18 +1,15 @@
 {
-  "name": "@parliament/gatsby-remark-afm",
+  "name": "@adobe/gatsby-remark-afm",
   "version": "0.4.0",
   "description": "Adobe Flavoured Markdown plugin for gatsby-transformer-remark",
   "main": "index.js",
   "scripts": {
     "test": "jest"
   },
-  "homepage": "https://git.corp.adobe.com/devrel/gatsby-remark-afm#readme",
+  "homepage": "https://github.com/adobe/gatsby-remark-afm#readme",
   "repository": {
     "type": "git",
-    "url": "git@git.corp.adobe.com:devrel/gatsby-remark-afm.git"
-  },
-  "publishConfig": {
-    "registry": "https://artifactory.corp.adobe.com/artifactory/api/npm/npm-adobe-release/"
+    "url": "git@github.com:adobe/gatsby-remark-afm.git"
   },
   "keywords": [
     "gatsby",
