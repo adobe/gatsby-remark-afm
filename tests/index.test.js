@@ -12,11 +12,11 @@ governing permissions and limitations under the License.
 const doNotLocalize = require("../src/DoNotLocalize");
 const admonitions = require("../src/Admonitions");
 const includeRelative = require("../src/IncludeRelative");
-const tabbedCodeBlocks = require("../src/TabbedCodeBlocks");
+// const tabbedCodeBlocks = require("../src/TabbedCodeBlocks");
 const spectrumHeading = require("../src/SpectrumHeading");
 const {
   getMarkdownASTForFile,
-  parseASTToMarkdown
+  parseASTToMarkdown,
 } = require("./helpers/markdown");
 const plugin = require("../index");
 const fs = require("fs");
@@ -178,6 +178,7 @@ describe("admonitions", () => {
   });
 });
 
+/*
 describe("tabbedCodeBlocks", () => {
   it("is truthy", () => {
     expect(tabbedCodeBlocks).toBeTruthy();
@@ -252,6 +253,7 @@ describe("tabbedCodeBlocks", () => {
     `);
   });
 });
+*/
 
 describe("spectrumHeading", () => {
   it("is truthy", () => {
@@ -293,7 +295,7 @@ describe("spectrumHeading", () => {
 
       This documentation provides instructions for Adobe Analytics 2.0 APIs. For working with Analytics 1.4 APIs, see [Analytics 1.4 API Documentation](https://github.com/AdobeDocs/analytics-1.4-apis).
 
-      The Adobe Analytics APIs are a collection of APIs that power Adobe Analytics products like Analysis Workspace. The APIs allow for the creation of data rich user interfaces that you can use to manipulate and integrate data. You can also create reports to explore, get insights, or answer important questions about your data.  
+      The Adobe Analytics APIs are a collection of APIs that power Adobe Analytics products like Analysis Workspace. The APIs allow for the creation of data rich user interfaces that you can use to manipulate and integrate data. You can also create reports to explore, get insights, or answer important questions about your data.
 
       _CONTRIBUTING: We encourage you to participate in our open documentation initiative, if you have suggestions, corrections, additions or deletions for this documentation, check out the source from [this github repo](https://github.com/AdobeDocs/analytics-2.0-apis), and submit a pull request with your contribution. For more information, refer to the [Contributing](https://github.com/AdobeDocs/analytics-2.0-apis/blob/master/CONTRIBUTING.md) page._
 
@@ -319,13 +321,13 @@ describe("spectrumHeading", () => {
 
       #### JWT
 
-      A JWT client is best if you are creating an application that needs to programmatically authenticate calls to the Adobe Analytics APIs. A new JWT token can be generated whenever the old one is about to expire so your application can continue to make API calls. 
+      A JWT client is best if you are creating an application that needs to programmatically authenticate calls to the Adobe Analytics APIs. A new JWT token can be generated whenever the old one is about to expire so your application can continue to make API calls.
 
       For more information see [JWT authentication](jwt.md).
 
       ## Try Now
 
-      Try the Analytics 2.0 API in seconds. Use our [Swagger UI](https://adobedocs.github.io/analytics-2.0-apis/) to explore APIs, make calls and get a response. Our Swagger UI also includes the full endpoint descriptions. 
+      Try the Analytics 2.0 API in seconds. Use our [Swagger UI](https://adobedocs.github.io/analytics-2.0-apis/) to explore APIs, make calls and get a response. Our Swagger UI also includes the full endpoint descriptions.
 
       ## Discovery API
 
@@ -338,7 +340,7 @@ describe("spectrumHeading", () => {
 
       ## Segments API Guide
 
-      The [Segments API Guide](segments-guide.md) provides configuration guidance and best practices for the \`/segments\` endpoint. 
+      The [Segments API Guide](segments-guide.md) provides configuration guidance and best practices for the \`/segments\` endpoint.
 
       ## Migrating from 1.4 APIs to 2.0 APIs
 

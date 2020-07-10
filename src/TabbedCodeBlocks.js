@@ -12,10 +12,8 @@ governing permissions and limitations under the License.
 const visit = require("unist-util-visit");
 
 function tabbedCodeBlocks(markdownAST) {
-  // console.log(JSON.stringify(markdownAST));
   let head = null;
   visit(markdownAST, "code", (node) => {
-    // console.log(JSON.stringify(node));
     if (node.meta && node.meta.includes(`tab-group`)) {
       if (!head) {
         // console.log("no head");
@@ -39,8 +37,6 @@ function tabbedCodeBlocks(markdownAST) {
         </TabView>`;
         delete head.meta;
       } else {
-        // console.log("head");
-
         let newTab = `<Tab
           disabled={false}
           icon={undefined}
@@ -60,7 +56,6 @@ function tabbedCodeBlocks(markdownAST) {
       head = null;
     }
   });
-  // console.log(JSON.stringify(markdownAST));
 }
 
 module.exports = tabbedCodeBlocks;
