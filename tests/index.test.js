@@ -12,6 +12,7 @@ governing permissions and limitations under the License.
 const doNotLocalize = require("../src/DoNotLocalize");
 const admonitions = require("../src/Admonitions");
 const includeRelative = require("../src/IncludeRelative");
+const hero = require("../src/Hero");
 // const tabbedCodeBlocks = require("../src/TabbedCodeBlocks");
 const {
   getMarkdownASTForFile,
@@ -19,6 +20,96 @@ const {
 } = require("./helpers/markdown");
 const plugin = require("../index");
 const fs = require("fs");
+
+describe("Hero", () => {
+  it("is truthy", () => {
+    expect(hero).toBeTruthy();
+  });
+  it("can transform into Hero", async () => {
+    const markdownAST = getMarkdownASTForFile("hero", true);
+    const processedAST = await plugin({ markdownAST });
+    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
+      "<div><hero image=\\"https://raw.githubusercontent.com/adobe/gatsby-theme-spectrum-example/main/src/pages/illustration.png\\" heading=\\"Adobe Analytics\\" text=\\"Adobe Product API offers limitless ways to integrate your most important customer data into key business processes. Adobe Product API offer limitless ways.\\"></hero></div>
+
+      ## Hero test
+
+      This was a test of the Hero component
+
+      ![Hero image](./illustration.png)
+
+      # Adobe Analytics
+
+      Adobe Product API offers limitless ways to integrate your most important customer data into key business processes. Adobe Product API offer limitless ways.
+
+      <Resources slots=\\"heading, links\\"/>
+
+      #### Resources
+
+      -   [Quickstart Guide](https://adobe.io)
+      -   [Adobe Analytics Github Repo](https://adobe.io)
+
+      ## Overview
+
+      This documentation provides instructions for Adobe Analytics 2.0 APIs. For working with Analytics 1.4 APIs, see [Analytics 1.4 API Documentation](https://adobe.io).
+
+      The Adobe Analytics APIs are a collection of APIs that power Adobe Analytics products like Analysis Workspace.
+      The APIs allow for the creation of data rich user interfaces that you can use to manipulate and integrate data.
+      You can also create reports to explore, get insights, or answer important questions about your data.
+
+      ## Discover
+
+      <ContentBlock width=\\"100%\\" slots=\\"heading, link, text\\"/>
+
+      ### Get Started
+
+      [Quickstart Guide](https://adobe.io)
+
+      Get started with the Adobe Analytics APIs.
+
+      <ContentBlock slots=\\"heading, link, text\\"/>
+
+      ### Guides
+
+      [Calculated Metrics API](https://adobe.io)
+
+      Returns information on the user's company that is necessary for making other Adobe Analytics API calls.
+
+      <ContentBlock slots=\\"link, text\\"/>
+
+      [Segments API](https://adobe.io)
+
+      Provides configuration guidance and best practices for the /segments endpoint.
+
+      <ContentBlock slots=\\"link, text\\"/>
+
+      [Reporting Guide API](https://adobe.io)
+
+      Provides configuration guidance and best practices for the /reports endpoint.
+
+      <ContentBlock width=\\"100%\\" slots=\\"heading, link, text\\"/>
+
+      ### API References
+
+      [Try the API](https://adobe.io)
+
+      Try the Analytics API with Swagger UI. Explore, make calls, with full endpoint descriptions.
+
+      ## Contributing
+
+      We encourage you to participate in our open documentation initiative, if you have suggestions, corrections, additions
+      or deletions for this documentation, check out the source from [this github repo](https://adobe.io), and submit a pull
+      request with your contribution. For more information, refer to the [contributing page](https://adobe.io).
+
+      ## API Requests & Rate Limits
+
+      The timeout for API requests through adobe.io is currently _60 seconds_.
+
+      The default rate limit for an Adobe Analytics Company is _120 requests per minute_. (The limit is enforced as _12 requests every 6 seconds_).
+      When rate limiting is being enforced you will get \`429\` HTTP response codes with the following response body: \`{\\"error_code\\":\\"429050\\",\\"message\\":\\"Too many requests\\"}\`
+      "
+    `);
+  });
+});
 
 describe("includeRelative", () => {
   it("is truthy", () => {

@@ -12,9 +12,11 @@ governing permissions and limitations under the License.
 const doNotLocalize = require("./src/DoNotLocalize");
 const admonitions = require("./src/Admonitions");
 const includeRelative = require("./src/IncludeRelative");
+const hero = require("./src/Hero");
 // const tabbedCodeBlocks = require("./src/TabbedCodeBlocks");
 
 module.exports = ({ markdownAST }, pluginOptions) => {
+  hero(markdownAST);
   includeRelative(markdownAST);
   doNotLocalize(markdownAST);
   admonitions(markdownAST);
