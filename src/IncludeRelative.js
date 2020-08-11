@@ -9,9 +9,25 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-const visit = require('unist-util-visit');
 
-function includeRelative(markdownAST) {
+const visit = require('unist-util-visit');
+const fs = require('fs');
+const normalizePath = require('normalize-path');
+const unified = require('unified');
+const parse = require('remark-parse');
+
+function includeRelative(markdownAST, pluginOptions) {
+  let options = pluginOptions === void 0 ? {} : pluginOptions,
+    directory = options.directory;
+
+  if (!directory) {
+    throw Error(`Required option \"directory\" not specified`);
+  } else if (!fs.existsSync(directory)) {
+    throw Error(`Invalid directory specified \"${directory}\"`);
+  } else if (!directory.endsWith('/')) {
+    directory += '/';
+  }
+
   visit(markdownAST, 'paragraph', (node) => {
     if (node.children.length === 1) {
       for (let child of node.children) {
@@ -25,17 +41,31 @@ function includeRelative(markdownAST) {
                 .replace('%}', '')
                 .replace('include_relative', '')
                 .trim();
-              text = text.replace(match, `markdown:${filename}`);
+
+              const file = text.replace(match, filename);
+              const path = normalizePath('' + directory + file);
+
+              if (!fs.existsSync(path)) {
+                throw Error(`Invalid fragment specified; no such file "${path}"`);
+              }
+
+              try {
+                const embedMarkdownAST = unified()
+                  .use(parse)
+                  .parse(fs.readFileSync(path, 'utf8'));
+                node.type = 'parent';
+                node.children = embedMarkdownAST.children;
+                delete node.value;
+              } catch (e) {
+                throw Error(`${e.message} \nFile: ${file}`);
+              }
             }
-            node.type = 'parent';
-            child.type = `inlineCode`;
-            child.value = `${text}`;
           }
         }
       }
     }
-    return markdownAST;
   });
+  return markdownAST;
 }
 
 module.exports = includeRelative;

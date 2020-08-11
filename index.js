@@ -15,14 +15,12 @@ const projectRootDir = path.dirname(__dirname);
 const doNotLocalize = require('./src/DoNotLocalize');
 const admonitions = require('./src/Admonitions');
 const includeRelative = require('./src/IncludeRelative');
-const embedMarkdown = require('./src/EmbedMarkdown');
+// const embedMarkdown = require('./src/EmbedMarkdown');
 
 module.exports = ({ markdownAST }, pluginOptions) => {
-  includeRelative(markdownAST);
-  embedMarkdown(markdownAST, {
+  includeRelative(markdownAST, {
     directory: `${projectRootDir}/parliament-client-template/src/content/`,
   });
-  // embedMarkdown(markdownAST, pluginOptions);
   doNotLocalize(markdownAST);
   admonitions(markdownAST);
 
