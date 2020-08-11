@@ -15,12 +15,7 @@ function admonitions(markdownAST) {
   visit(markdownAST, 'blockquote', (node) => {
     let children = node.children;
     let html = null;
-    if (
-      children.length > 0 &&
-      children[0].type === 'paragraph' &&
-      children[0].children.length > 0 &&
-      children[0].children[0].type === 'linkReference'
-    ) {
+    if (children.length > 0 && children[0].type === 'paragraph' && children[0].children.length > 0 && children[0].children[0].type === 'linkReference') {
       switch (children[0].children[0].label) {
         case '!NOTE':
           html = `<Alert header="Note" variant="info">`;
@@ -62,7 +57,6 @@ function admonitions(markdownAST) {
         node.value = html;
       }
     }
-    return markdownAST;
   });
 }
 

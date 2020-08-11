@@ -20,7 +20,6 @@ function doNotLocalize(markdownAST) {
       node.value = text.replace('!DNL', '').trim();
       node.children = undefined;
     }
-    return markdownAST;
   });
 }
 

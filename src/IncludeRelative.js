@@ -17,6 +17,8 @@ const unified = require('unified');
 const parse = require('remark-parse');
 
 function includeRelative(markdownAST, pluginOptions) {
+  console.log(pluginOptions);
+
   let options = pluginOptions === void 0 ? {} : pluginOptions,
     directory = options.directory;
 
@@ -43,7 +45,9 @@ function includeRelative(markdownAST, pluginOptions) {
                 .trim();
 
               const file = text.replace(match, filename);
-              const path = normalizePath('' + directory + file);
+              // const fileAbsoluteDir = fileAbsolutePath.substring(0, fileAbsolutePath.lastIndexOf('/'));
+              // const path = normalizePath(`${fileAbsoluteDir}${file}`);
+              const path = normalizePath(`${directory}${file}`);
 
               if (!fs.existsSync(path)) {
                 throw Error(`Invalid fragment specified; no such file "${path}"`);
@@ -65,7 +69,6 @@ function includeRelative(markdownAST, pluginOptions) {
       }
     }
   });
-  return markdownAST;
 }
 
 module.exports = includeRelative;

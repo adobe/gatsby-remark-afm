@@ -16,13 +16,13 @@ const doNotLocalize = require('./src/DoNotLocalize');
 const admonitions = require('./src/Admonitions');
 const includeRelative = require('./src/IncludeRelative');
 
-const tempOptions = {
-  // directory: `${projectRootDir}/parliament-client-template/src/content/`,
-  directory: `${projectRootDir}/gatsby-remark-afm/tests/fixtures/`,
-};
+// const testOptions = {
+//   // directory: `${projectRootDir}/parliament-client-template/src/content/`,
+//   directory: `${projectRootDir}/gatsby-remark-afm/tests/fixtures/`,
+// };
 
 module.exports = ({ markdownAST }, pluginOptions) => {
-  includeRelative(markdownAST, tempOptions);
+  includeRelative(markdownAST, pluginOptions);
   doNotLocalize(markdownAST);
   admonitions(markdownAST);
 
