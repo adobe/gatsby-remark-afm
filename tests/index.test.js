@@ -13,66 +13,29 @@ const doNotLocalize = require('../src/DoNotLocalize');
 const admonitions = require('../src/Admonitions');
 const includeRelative = require('../src/IncludeRelative');
 // const tabbedCodeBlocks = require("../src/TabbedCodeBlocks");
-const {
-  getMarkdownASTForFile,
-  parseASTToMarkdown,
-} = require('./helpers/markdown');
+const { getMarkdownASTForFile, parseASTToMarkdown } = require('./helpers/markdown');
 const plugin = require('../index');
-const fs = require('fs');
+
+const { getAstData, testTrees } = require('./helpers/astData');
 
 describe('includeRelative', () => {
   it('is truthy', () => {
     expect(includeRelative).toBeTruthy();
   });
-  it('can detect includeRelative', async () => {
+  it('can detect and render include within markdown which itself has an include', async () => {
     const markdownAST = getMarkdownASTForFile('include-relative', true);
     const processedAST = await plugin({ markdownAST });
-    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
-      "before
+    const includeWithInclude = getAstData(testTrees.includeWithInclude);
 
-      more text
-
-      <div class=\\"markdown-fragment\\"><p>Some text</p>
-      <blockquote>
-      <p>[!CAUTION]</p>
-      <p>This is a standard CAUTION block.</p>
-      </blockquote>
-      </div>
-
-      after
-      "
-    `);
+    expect(processedAST).toEqual(includeWithInclude);
   });
-  it('can detect includeRelative (only includes)', async () => {
+
+  it('can properly render admonitions within the contents of the included files', async () => {
     const markdownAST = getMarkdownASTForFile('aepcs-api-reference', true);
     const processedAST = await plugin({ markdownAST });
+    const includesWithAdmonitions = getAstData(testTrees.includesWithAdmonitions);
 
-    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
-      "<div class=\\"markdown-fragment\\"><h2>acppath_delete_asset_top</h2>
-      <p>Some text for delete asset top.</p>
-      <blockquote>
-      <p>[!CAUTION]</p>
-      <p>This is a standard CAUTION block.</p>
-      </blockquote>
-      </div>
-
-      <div class=\\"markdown-fragment\\"><h2>acppath_delete_asset_params</h2>
-      <p>Good text for a good topic.</p>
-      <blockquote>
-      <p>[!CAUTION]</p>
-      <p>This is a standard CAUTION block.</p>
-      </blockquote>
-      </div>
-
-      <div class=\\"markdown-fragment\\"><h2>acppath_delete_asset_bottom</h2>
-      <p>Some text for delete asset bottom topic.</p>
-      <blockquote>
-      <p>[!CAUTION]</p>
-      <p>This is a standard CAUTION block.</p>
-      </blockquote>
-      </div>
-      "
-    `);
+    expect(processedAST).toEqual(includesWithAdmonitions);
   });
 });
 

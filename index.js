@@ -15,12 +15,14 @@ const projectRootDir = path.dirname(__dirname);
 const doNotLocalize = require('./src/DoNotLocalize');
 const admonitions = require('./src/Admonitions');
 const includeRelative = require('./src/IncludeRelative');
-// const embedMarkdown = require('./src/EmbedMarkdown');
+
+const tempOptions = {
+  // directory: `${projectRootDir}/parliament-client-template/src/content/`,
+  directory: `${projectRootDir}/gatsby-remark-afm/tests/fixtures/`,
+};
 
 module.exports = ({ markdownAST }, pluginOptions) => {
-  includeRelative(markdownAST, {
-    directory: `${projectRootDir}/parliament-client-template/src/content/`,
-  });
+  includeRelative(markdownAST, tempOptions);
   doNotLocalize(markdownAST);
   admonitions(markdownAST);
 

@@ -53,7 +53,7 @@ function includeRelative(markdownAST, pluginOptions) {
                 const embedMarkdownAST = unified()
                   .use(parse)
                   .parse(fs.readFileSync(path, 'utf8'));
-                node.type = 'parent';
+                node.type = 'include';
                 node.children = embedMarkdownAST.children;
                 delete node.value;
               } catch (e) {
