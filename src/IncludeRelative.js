@@ -17,7 +17,7 @@ const unified = require('unified');
 const parse = require('remark-parse');
 
 function includeRelative(markdownAST, pluginOptions) {
-  const options = pluginOptions === void 0 ? null : pluginOptions,
+  let options = pluginOptions === void 0 ? null : pluginOptions,
     directory = options.directory;
 
   if (!directory) {
