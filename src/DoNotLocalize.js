@@ -12,7 +12,7 @@ governing permissions and limitations under the License.
 const visit = require('unist-util-visit');
 const toString = require('mdast-util-to-string');
 
-function doNotLocalize(markdownAST) {
+function doNotLocalize(markdownAST, pluginOptions) {
   visit(markdownAST, 'linkReference', (node) => {
     if (node.label.includes('!DNL')) {
       let text = toString(node);

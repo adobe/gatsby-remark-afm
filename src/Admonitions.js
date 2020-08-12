@@ -11,7 +11,7 @@ governing permissions and limitations under the License.
 */
 const visit = require('unist-util-visit');
 
-function admonitions(markdownAST) {
+function admonitions(markdownAST, pluginOptions) {
   visit(markdownAST, 'blockquote', (node) => {
     let children = node.children;
     let html = null;

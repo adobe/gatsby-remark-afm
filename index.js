@@ -9,22 +9,15 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-const path = require('path');
-const projectRootDir = path.dirname(__dirname);
 
 const doNotLocalize = require('./src/DoNotLocalize');
 const admonitions = require('./src/Admonitions');
 const includeRelative = require('./src/IncludeRelative');
 
-// const testOptions = {
-//   // directory: `${projectRootDir}/parliament-client-template/src/content/`,
-//   directory: `${projectRootDir}/gatsby-remark-afm/tests/fixtures/`,
-// };
-
 module.exports = ({ markdownAST }, pluginOptions) => {
   includeRelative(markdownAST, pluginOptions);
-  doNotLocalize(markdownAST);
-  admonitions(markdownAST);
+  doNotLocalize(markdownAST, pluginOptions);
+  admonitions(markdownAST, pluginOptions);
 
   return markdownAST;
 };
