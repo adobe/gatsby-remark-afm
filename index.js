@@ -9,15 +9,15 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-const doNotLocalize = require("./src/DoNotLocalize");
-const admonitions = require("./src/Admonitions");
-const includeRelative = require("./src/IncludeRelative");
-// const tabbedCodeBlocks = require("./src/TabbedCodeBlocks");
+
+const doNotLocalize = require('./src/DoNotLocalize');
+const admonitions = require('./src/Admonitions');
+const includeRelative = require('./src/IncludeRelative');
 
 module.exports = ({ markdownAST }, pluginOptions) => {
-  includeRelative(markdownAST);
-  doNotLocalize(markdownAST);
-  admonitions(markdownAST);
-  // tabbedCodeBlocks(markdownAST);
+  includeRelative(markdownAST, pluginOptions);
+  doNotLocalize(markdownAST, pluginOptions);
+  admonitions(markdownAST, pluginOptions);
+
   return markdownAST;
 };

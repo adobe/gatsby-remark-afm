@@ -9,10 +9,26 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-const visit = require("unist-util-visit");
 
-function includeRelative(markdownAST) {
-  visit(markdownAST, "paragraph", (node) => {
+const visit = require('unist-util-visit');
+const fs = require('fs');
+const normalizePath = require('normalize-path');
+const unified = require('unified');
+const parse = require('remark-parse');
+
+function includeRelative(markdownAST, pluginOptions) {
+  let options = pluginOptions === void 0 ? null : pluginOptions,
+    directory = options.directory;
+
+  if (!directory) {
+    throw Error(`Required option \"directory\" not specified`);
+  } else if (!fs.existsSync(directory)) {
+    throw Error(`Invalid directory specified \"${directory}\"`);
+  } else if (!directory.endsWith('/')) {
+    directory += '/';
+  }
+
+  visit(markdownAST, 'paragraph', (node) => {
     if (node.children.length === 1) {
       for (let child of node.children) {
         let text = child.value;
@@ -21,47 +37,32 @@ function includeRelative(markdownAST) {
           if (matches && matches.length > 0) {
             for (const match of matches) {
               let filename = match
-                .replace("{%", "")
-                .replace("%}", "")
-                .replace("include_relative", "")
+                .replace('{%', '')
+                .replace('%}', '')
+                .replace('include_relative', '')
                 .trim();
-              text = text.replace(
-                match,
-                `<IncludeMarkdown file="${filename}"/ >`
-              );
+
+              const file = text.replace(match, filename);
+              // const fileAbsoluteDir = fileAbsolutePath.substring(0, fileAbsolutePath.lastIndexOf('/'));
+              // const path = normalizePath(`${fileAbsoluteDir}${file}`);
+              const path = normalizePath(`${directory}${file}`);
+
+              if (!fs.existsSync(path)) {
+                throw Error(`Invalid fragment specified; no such file "${path}"`);
+              }
+
+              try {
+                const embedMarkdownAST = unified()
+                  .use(parse)
+                  .parse(fs.readFileSync(path, 'utf8'));
+                node.type = 'include';
+                node.children = embedMarkdownAST.children;
+                delete node.value;
+              } catch (e) {
+                throw Error(`${e.message} \nFile: ${file}`);
+              }
             }
-            child.type = `html`;
-            child.value = `<div>${text}</div>`;
           }
-        }
-      }
-    } else if (node.children.length > 1 && node.children[0].value) {
-      const matches = node.children[0].value.match(/{%\s*include/g);
-      if (matches && matches.length > 0) {
-        let text = "";
-        for (let child of node.children) {
-          if (child.type !== "emphasis") {
-            text += child.value;
-          } else {
-            for (let emphasisChild of child.children) {
-              text = `${text}_${emphasisChild.value}_`;
-            }
-          }
-        }
-        const matches = text.match(/{%\s*include_relative\s*(.*?)\s*%}/g);
-        if (matches && matches.length > 0) {
-          for (const match of matches) {
-            let filename = match
-              .replace("{%", "")
-              .replace("%}", "")
-              .replace("include_relative", "")
-              .trim();
-            text = text.replace(
-              match,
-              `<IncludeMarkdown file="${filename}"/ >`
-            );
-          }
-          node.children = [{ type: `html`, value: `<div>${text}</div>` }];
         }
       }
     }

@@ -9,67 +9,45 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-const doNotLocalize = require("../src/DoNotLocalize");
-const admonitions = require("../src/Admonitions");
-const includeRelative = require("../src/IncludeRelative");
+const doNotLocalize = require('../src/DoNotLocalize');
+const admonitions = require('../src/Admonitions');
+const includeRelative = require('../src/IncludeRelative');
 // const tabbedCodeBlocks = require("../src/TabbedCodeBlocks");
-const {
-  getMarkdownASTForFile,
-  parseASTToMarkdown,
-} = require("./helpers/markdown");
-const plugin = require("../index");
-const fs = require("fs");
+const { getMarkdownASTForFile, parseASTToMarkdown } = require('./helpers/markdown');
+const plugin = require('../index');
 
-describe("includeRelative", () => {
-  it("is truthy", () => {
+const path = require('path');
+const projectRootDir = path.dirname(__dirname);
+const testOptions = {
+  directory: `${projectRootDir}/tests/fixtures/`,
+};
+
+describe('includeRelative', () => {
+  it('is truthy', () => {
     expect(includeRelative).toBeTruthy();
   });
-  it("can detect includeRelative", async () => {
-    const markdownAST = getMarkdownASTForFile("include-relative", true);
-    const processedAST = await plugin({ markdownAST });
-    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
-      "before
+  it('can detect and render include within markdown which itself has an include', async () => {
+    const markdownAST = getMarkdownASTForFile('include-relative', true);
+    const processedAST = await plugin({ markdownAST }, testOptions);
 
-      more text
-
-      <div><IncludeMarkdown file=\\"include-me.md\\"/ >
-      after</div>
-      "
-    `);
+    expect(processedAST).toMatchSnapshot();
   });
-  it("can detect includeRelative (only includes)", async () => {
-    const markdownAST = getMarkdownASTForFile("aepcs-api-reference", true);
-    const processedAST = await plugin({ markdownAST });
-    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
-      "<div><IncludeMarkdown file=\\"static/acppath_delete_asset_top.md\\"/ ></div>
 
-      <div><IncludeMarkdown file=\\"auto-generated/acppath_delete_asset_params.md\\"/ ></div>
+  it('can properly render admonitions within the contents of the included files', async () => {
+    const markdownAST = getMarkdownASTForFile('aepcs-api-reference', true);
+    const processedAST = await plugin({ markdownAST }, testOptions);
 
-      <div><IncludeMarkdown file=\\"static/acppath_delete_asset_bottom.md\\"/ ></div>
-      "
-    `);
-  });
-  it("can detect includeRelative after gatsby-transform-remark", async () => {
-    const markdownAST = require("../tests/fixtures/acpcs-api-reference");
-    const processedAST = await plugin({ markdownAST });
-    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
-      "<div><IncludeMarkdown file=\\"static/acppath_delete_using_repometadata_top.md\\"/ ></div>
-
-      <div><IncludeMarkdown file=\\"auto-generated/acppath_delete_using_repometadata_params.md\\"/ ></div>
-
-      <div><IncludeMarkdown file=\\"static/acppath_delete_using_repometadata_bottom.md\\"/ ></div>
-      "
-    `);
+    expect(processedAST).toMatchSnapshot();
   });
 });
 
-describe("doNotLocalize", () => {
-  it("is truthy", () => {
+describe('doNotLocalize', () => {
+  it('is truthy', () => {
     expect(doNotLocalize).toBeTruthy();
   });
-  it("can transform !DNL tags", async () => {
-    const markdownAST = getMarkdownASTForFile("do-not-localize", true);
-    const processedAST = await plugin({ markdownAST });
+  it('can transform !DNL tags', async () => {
+    const markdownAST = getMarkdownASTForFile('do-not-localize', true);
+    const processedAST = await plugin({ markdownAST }, testOptions);
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
       "# Don't Delete:
 
@@ -81,13 +59,13 @@ describe("doNotLocalize", () => {
   });
 });
 
-describe("admonitions", () => {
-  it("is truthy", () => {
+describe('admonitions', () => {
+  it('is truthy', () => {
     expect(admonitions).toBeTruthy();
   });
-  it("can transform !Note tags", async () => {
-    const markdownAST = getMarkdownASTForFile("admonitions-note", true);
-    const processedAST = await plugin({ markdownAST });
+  it('can transform !Note tags', async () => {
+    const markdownAST = getMarkdownASTForFile('admonitions-note', true);
+    const processedAST = await plugin({ markdownAST }, testOptions);
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
       "# Don't Delete:
 
@@ -97,9 +75,9 @@ describe("admonitions", () => {
       "
     `);
   });
-  it("can transform !Caution tags", async () => {
-    const markdownAST = getMarkdownASTForFile("admonitions-caution", true);
-    const processedAST = await plugin({ markdownAST });
+  it('can transform !Caution tags', async () => {
+    const markdownAST = getMarkdownASTForFile('admonitions-caution', true);
+    const processedAST = await plugin({ markdownAST }, testOptions);
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
       "# Don't Delete:
 
@@ -109,9 +87,9 @@ describe("admonitions", () => {
       "
     `);
   });
-  it("can transform !Warning tags", async () => {
-    const markdownAST = getMarkdownASTForFile("admonitions-warning", true);
-    const processedAST = await plugin({ markdownAST });
+  it('can transform !Warning tags', async () => {
+    const markdownAST = getMarkdownASTForFile('admonitions-warning', true);
+    const processedAST = await plugin({ markdownAST }, testOptions);
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
       "# Don't Delete:
 
@@ -121,9 +99,9 @@ describe("admonitions", () => {
       "
     `);
   });
-  it("can transform !Tip tags", async () => {
-    const markdownAST = getMarkdownASTForFile("admonitions-tip", true);
-    const processedAST = await plugin({ markdownAST });
+  it('can transform !Tip tags', async () => {
+    const markdownAST = getMarkdownASTForFile('admonitions-tip', true);
+    const processedAST = await plugin({ markdownAST }, testOptions);
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
       "# Don't Delete:
 
@@ -133,9 +111,9 @@ describe("admonitions", () => {
       "
     `);
   });
-  it("can transform multi-line tags", async () => {
-    const markdownAST = getMarkdownASTForFile("admonitions-multiline", true);
-    const processedAST = await plugin({ markdownAST });
+  it('can transform multi-line tags', async () => {
+    const markdownAST = getMarkdownASTForFile('admonitions-multiline', true);
+    const processedAST = await plugin({ markdownAST }, testOptions);
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
       "# Don't Delete:
 
@@ -149,9 +127,9 @@ describe("admonitions", () => {
       "
     `);
   });
-  it("can transform inline tags", async () => {
-    const markdownAST = getMarkdownASTForFile("admonitions-inline", true);
-    const processedAST = await plugin({ markdownAST });
+  it('can transform inline tags', async () => {
+    const markdownAST = getMarkdownASTForFile('admonitions-inline', true);
+    const processedAST = await plugin({ markdownAST }, testOptions);
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
       "# Don't Delete:
 
@@ -163,9 +141,9 @@ describe("admonitions", () => {
       "
     `);
   });
-  it("can transform tags with embedded urls", async () => {
-    const markdownAST = getMarkdownASTForFile("admonitions-url", true);
-    const processedAST = await plugin({ markdownAST });
+  it('can transform tags with embedded urls', async () => {
+    const markdownAST = getMarkdownASTForFile('admonitions-url', true);
+    const processedAST = await plugin({ markdownAST }, testOptions);
     expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
       "# Don't Delete:
 

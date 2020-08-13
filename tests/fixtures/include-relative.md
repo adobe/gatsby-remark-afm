@@ -2,5 +2,6 @@ before
 
 more text
 
-{% include_relative include-me.md %}
+{% include_relative include_me.md %}
+
 after

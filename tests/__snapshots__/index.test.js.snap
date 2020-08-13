@@ -1,0 +1,550 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`includeRelative can detect and render include within markdown which itself has an include 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 7,
+              "line": 1,
+              "offset": 6,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "type": "text",
+          "value": "before",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 7,
+          "line": 1,
+          "offset": 6,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "type": "paragraph",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 10,
+              "line": 3,
+              "offset": 17,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 3,
+              "offset": 8,
+            },
+          },
+          "type": "text",
+          "value": "more text",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 10,
+          "line": 3,
+          "offset": 17,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 3,
+          "offset": 8,
+        },
+      },
+      "type": "paragraph",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "position": Position {
+                "end": Object {
+                  "column": 10,
+                  "line": 1,
+                  "offset": 9,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 1,
+                  "line": 1,
+                  "offset": 0,
+                },
+              },
+              "type": "text",
+              "value": "Some text",
+            },
+          ],
+          "position": Position {
+            "end": Object {
+              "column": 10,
+              "line": 1,
+              "offset": 9,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "type": "paragraph",
+        },
+        Object {
+          "children": undefined,
+          "position": Position {
+            "end": Object {
+              "column": 36,
+              "line": 5,
+              "offset": 61,
+            },
+            "indent": Array [
+              1,
+              1,
+            ],
+            "start": Object {
+              "column": 1,
+              "line": 3,
+              "offset": 11,
+            },
+          },
+          "type": "html",
+          "value": "<Alert header=\\"Caution\\" variant=\\"error\\">This is a standard CAUTION block.</Alert>",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 37,
+          "line": 5,
+          "offset": 55,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 5,
+          "offset": 19,
+        },
+      },
+      "type": "include",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 6,
+              "line": 7,
+              "offset": 62,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 7,
+              "offset": 57,
+            },
+          },
+          "type": "text",
+          "value": "after",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 6,
+          "line": 7,
+          "offset": 62,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 7,
+          "offset": 57,
+        },
+      },
+      "type": "paragraph",
+    },
+  ],
+  "position": Object {
+    "end": Object {
+      "column": 1,
+      "line": 8,
+      "offset": 63,
+    },
+    "start": Object {
+      "column": 1,
+      "line": 1,
+      "offset": 0,
+    },
+  },
+  "type": "root",
+}
+`;
+
+exports[`includeRelative can properly render admonitions within the contents of the included files 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "position": Position {
+                "end": Object {
+                  "column": 28,
+                  "line": 1,
+                  "offset": 27,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 4,
+                  "line": 1,
+                  "offset": 3,
+                },
+              },
+              "type": "text",
+              "value": "acppath_delete_asset_top",
+            },
+          ],
+          "depth": 2,
+          "position": Position {
+            "end": Object {
+              "column": 28,
+              "line": 1,
+              "offset": 27,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "type": "heading",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "position": Position {
+                "end": Object {
+                  "column": 32,
+                  "line": 3,
+                  "offset": 60,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 1,
+                  "line": 3,
+                  "offset": 29,
+                },
+              },
+              "type": "text",
+              "value": "Some text for delete asset top.",
+            },
+          ],
+          "position": Position {
+            "end": Object {
+              "column": 32,
+              "line": 3,
+              "offset": 60,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 3,
+              "offset": 29,
+            },
+          },
+          "type": "paragraph",
+        },
+        Object {
+          "children": undefined,
+          "position": Position {
+            "end": Object {
+              "column": 36,
+              "line": 7,
+              "offset": 112,
+            },
+            "indent": Array [
+              1,
+              1,
+            ],
+            "start": Object {
+              "column": 1,
+              "line": 5,
+              "offset": 62,
+            },
+          },
+          "type": "html",
+          "value": "<Alert header=\\"Caution\\" variant=\\"error\\">This is a standard CAUTION block.</Alert>",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 58,
+          "line": 1,
+          "offset": 57,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "type": "include",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "position": Position {
+                "end": Object {
+                  "column": 31,
+                  "line": 1,
+                  "offset": 30,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 4,
+                  "line": 1,
+                  "offset": 3,
+                },
+              },
+              "type": "text",
+              "value": "acppath_delete_asset_params",
+            },
+          ],
+          "depth": 2,
+          "position": Position {
+            "end": Object {
+              "column": 31,
+              "line": 1,
+              "offset": 30,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "type": "heading",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "position": Position {
+                "end": Object {
+                  "column": 28,
+                  "line": 3,
+                  "offset": 59,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 1,
+                  "line": 3,
+                  "offset": 32,
+                },
+              },
+              "type": "text",
+              "value": "Good text for a good topic.",
+            },
+          ],
+          "position": Position {
+            "end": Object {
+              "column": 28,
+              "line": 3,
+              "offset": 59,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 3,
+              "offset": 32,
+            },
+          },
+          "type": "paragraph",
+        },
+        Object {
+          "children": undefined,
+          "position": Position {
+            "end": Object {
+              "column": 36,
+              "line": 7,
+              "offset": 111,
+            },
+            "indent": Array [
+              1,
+              1,
+            ],
+            "start": Object {
+              "column": 1,
+              "line": 5,
+              "offset": 61,
+            },
+          },
+          "type": "html",
+          "value": "<Alert header=\\"Caution\\" variant=\\"error\\">This is a standard CAUTION block.</Alert>",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 69,
+          "line": 3,
+          "offset": 127,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 3,
+          "offset": 59,
+        },
+      },
+      "type": "include",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "position": Position {
+                "end": Object {
+                  "column": 31,
+                  "line": 1,
+                  "offset": 30,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 4,
+                  "line": 1,
+                  "offset": 3,
+                },
+              },
+              "type": "text",
+              "value": "acppath_delete_asset_bottom",
+            },
+          ],
+          "depth": 2,
+          "position": Position {
+            "end": Object {
+              "column": 31,
+              "line": 1,
+              "offset": 30,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "type": "heading",
+        },
+        Object {
+          "children": Array [
+            Object {
+              "position": Position {
+                "end": Object {
+                  "column": 41,
+                  "line": 3,
+                  "offset": 72,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 1,
+                  "line": 3,
+                  "offset": 32,
+                },
+              },
+              "type": "text",
+              "value": "Some text for delete asset bottom topic.",
+            },
+          ],
+          "position": Position {
+            "end": Object {
+              "column": 41,
+              "line": 3,
+              "offset": 72,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 3,
+              "offset": 32,
+            },
+          },
+          "type": "paragraph",
+        },
+        Object {
+          "children": undefined,
+          "position": Position {
+            "end": Object {
+              "column": 36,
+              "line": 7,
+              "offset": 124,
+            },
+            "indent": Array [
+              1,
+              1,
+            ],
+            "start": Object {
+              "column": 1,
+              "line": 5,
+              "offset": 74,
+            },
+          },
+          "type": "html",
+          "value": "<Alert header=\\"Caution\\" variant=\\"error\\">This is a standard CAUTION block.</Alert>",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 61,
+          "line": 5,
+          "offset": 189,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 5,
+          "offset": 129,
+        },
+      },
+      "type": "include",
+    },
+  ],
+  "position": Object {
+    "end": Object {
+      "column": 1,
+      "line": 6,
+      "offset": 190,
+    },
+    "start": Object {
+      "column": 1,
+      "line": 1,
+      "offset": 0,
+    },
+  },
+  "type": "root",
+}
+`;
