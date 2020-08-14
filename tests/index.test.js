@@ -12,6 +12,7 @@ governing permissions and limitations under the License.
 const doNotLocalize = require('../src/DoNotLocalize');
 const admonitions = require('../src/Admonitions');
 const includeRelative = require('../src/IncludeRelative');
+const cleanHtml = require('../src/CleanHtml');
 // const tabbedCodeBlocks = require("../src/TabbedCodeBlocks");
 const { getMarkdownASTForFile, parseASTToMarkdown } = require('./helpers/markdown');
 const plugin = require('../index');
@@ -21,6 +22,30 @@ const projectRootDir = path.dirname(__dirname);
 const testOptions = {
   directory: `${projectRootDir}/tests/fixtures/`,
 };
+
+describe('cleanHtml', () => {
+  it('is truthy', () => {
+    expect(cleanHtml).toBeTruthy();
+  });
+  it('can detect and fix these open HTML tags: br, hr, and img', async () => {
+    const markdownAST = getMarkdownASTForFile('markdown-with-open-html-tags', true);
+    const processedAST = await plugin({ markdownAST }, testOptions);
+
+    expect(processedAST).toMatchSnapshot();
+  });
+  it('does nothing with the properly closed br, hr, and img tags in a markdown file', async () => {
+    const markdownAST = getMarkdownASTForFile('markdown-with-closed-html-tags', true);
+    const processedAST = await plugin({ markdownAST }, testOptions);
+
+    expect(processedAST).toMatchSnapshot();
+  });
+  it('works with a mix of properly closed and open br, hr, and img tags in a markdown file', async () => {
+    const markdownAST = getMarkdownASTForFile('markdown-with-closed-and-open-html-tags', true);
+    const processedAST = await plugin({ markdownAST }, testOptions);
+
+    expect(processedAST).toMatchSnapshot();
+  });
+});
 
 describe('includeRelative', () => {
   it('is truthy', () => {
