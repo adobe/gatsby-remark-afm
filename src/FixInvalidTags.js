@@ -12,28 +12,28 @@ governing permissions and limitations under the License.
 
 const visit = require('unist-util-visit');
 
-function cleanHtml(markdownAST, pluginOptions) {
+function fixInvalidTags(markdownAST, pluginOptions) {
   visit(markdownAST, ['html', 'jsx'], (node) => {
-    let html = node.value;
+    let tags = node.value;
 
-    const openImg = html.match(/<img\s*(.*?)[^/](>)/);
-    if (openImg) {
-      const closedImg = openImg[0].split('>').join('/>');
-      html = html.split(openImg[0]).join(closedImg);
+    const invalidImgTag = tags.match(/<img\s*(.*?)[^/](>)/);
+    if (invalidImgTag) {
+      const validImgTag = invalidImgTag[0].split('>').join('/>');
+      tags = tags.split(invalidImgTag[0]).join(validImgTag);
     }
 
-    const cleanedHtml = html
+    const validTags = tags
       .split('<br>')
       .join('<br/>')
       .split('<hr>')
       .join('<hr/>');
 
     try {
-      node.value = cleanedHtml;
+      node.value = validTags;
     } catch (e) {
       throw Error(`${e.message}`);
     }
   });
 }
 
-module.exports = cleanHtml;
+module.exports = fixInvalidTags;

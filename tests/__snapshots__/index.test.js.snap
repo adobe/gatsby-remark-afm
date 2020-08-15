@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`cleanHtml can detect and fix these open HTML tags: br, hr, and img 1`] = `
+exports[`fixInvalidTags can detect and fix these open HTML tags: br, hr, and img 1`] = `
 Object {
   "children": Array [
     Object {
@@ -90,7 +90,7 @@ Object {
 }
 `;
 
-exports[`cleanHtml does nothing with the properly closed br, hr, and img tags in a markdown file 1`] = `
+exports[`fixInvalidTags does nothing with the properly closed br, hr, and img tags in a markdown file 1`] = `
 Object {
   "children": Array [
     Object {
@@ -180,7 +180,7 @@ Object {
 }
 `;
 
-exports[`cleanHtml works with a mix of properly closed and open br, hr, and img tags in a markdown file 1`] = `
+exports[`fixInvalidTags works with a mix of properly closed and open br, hr, and img tags in a markdown file 1`] = `
 Object {
   "children": Array [
     Object {

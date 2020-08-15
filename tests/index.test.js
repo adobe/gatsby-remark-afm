@@ -12,7 +12,7 @@ governing permissions and limitations under the License.
 const doNotLocalize = require('../src/DoNotLocalize');
 const admonitions = require('../src/Admonitions');
 const includeRelative = require('../src/IncludeRelative');
-const cleanHtml = require('../src/CleanHtml');
+const fixInvalidTags = require('../src/FixInvalidTags');
 // const tabbedCodeBlocks = require("../src/TabbedCodeBlocks");
 const { getMarkdownASTForFile, parseASTToMarkdown } = require('./helpers/markdown');
 const plugin = require('../index');
@@ -23,9 +23,9 @@ const testOptions = {
   directory: `${projectRootDir}/tests/fixtures/`,
 };
 
-describe('cleanHtml', () => {
+describe('fixInvalidTags', () => {
   it('is truthy', () => {
-    expect(cleanHtml).toBeTruthy();
+    expect(fixInvalidTags).toBeTruthy();
   });
   it('can detect and fix these open HTML tags: br, hr, and img', async () => {
     const markdownAST = getMarkdownASTForFile('markdown-with-open-html-tags', true);
