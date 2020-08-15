@@ -13,7 +13,7 @@ governing permissions and limitations under the License.
 const visit = require('unist-util-visit');
 
 function cleanHtml(markdownAST, pluginOptions) {
-  visit(markdownAST, 'html', (node) => {
+  visit(markdownAST, ['html', 'jsx'], (node) => {
     let html = node.value;
 
     const openImg = html.match(/<img\s*(.*?)[^/](>)/);
