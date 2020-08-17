@@ -16,8 +16,8 @@ const includeRelative = require('./src/IncludeRelative');
 const fixInvalidTags = require('./src/FixInvalidTags');
 
 module.exports = ({ markdownAST }, pluginOptions) => {
-  fixInvalidTags(markdownAST, pluginOptions);
   includeRelative(markdownAST, pluginOptions);
+  fixInvalidTags(markdownAST, pluginOptions);
   doNotLocalize(markdownAST, pluginOptions);
   admonitions(markdownAST, pluginOptions);
 

@@ -90,6 +90,150 @@ Object {
 }
 `;
 
+exports[`fixInvalidTags closes open tags in any included markdown files 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 34,
+              "line": 1,
+              "offset": 33,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 3,
+              "line": 1,
+              "offset": 2,
+            },
+          },
+          "type": "text",
+          "value": "Markdown include with open tags",
+        },
+      ],
+      "depth": 1,
+      "position": Position {
+        "end": Object {
+          "column": 34,
+          "line": 1,
+          "offset": 33,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "type": "heading",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "position": Position {
+                "end": Object {
+                  "column": 24,
+                  "line": 1,
+                  "offset": 23,
+                },
+                "indent": Array [],
+                "start": Object {
+                  "column": 3,
+                  "line": 1,
+                  "offset": 2,
+                },
+              },
+              "type": "text",
+              "value": "SDS API Documentation",
+            },
+          ],
+          "depth": 1,
+          "position": Position {
+            "end": Object {
+              "column": 24,
+              "line": 1,
+              "offset": 23,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "type": "heading",
+        },
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 183,
+              "line": 2,
+              "offset": 206,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 2,
+              "offset": 24,
+            },
+          },
+          "type": "html",
+          "value": "<hr/><br/>This documentation describes SDS APIs, that can be broadly categorized into : Index, Ops, ResolveBy. For any questions please contact acp-cs-sds-engineering@adobe.com<br/><br/>",
+        },
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 29,
+              "line": 4,
+              "offset": 236,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 4,
+              "offset": 208,
+            },
+          },
+          "type": "html",
+          "value": "<img src=\\"images/image.png\\"/>",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 55,
+          "line": 3,
+          "offset": 89,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 3,
+          "offset": 35,
+        },
+      },
+      "type": "include",
+    },
+  ],
+  "position": Object {
+    "end": Object {
+      "column": 1,
+      "line": 4,
+      "offset": 90,
+    },
+    "start": Object {
+      "column": 1,
+      "line": 1,
+      "offset": 0,
+    },
+  },
+  "type": "root",
+}
+`;
+
 exports[`fixInvalidTags does nothing with the properly closed br, hr, and img tags in a markdown file 1`] = `
 Object {
   "children": Array [
