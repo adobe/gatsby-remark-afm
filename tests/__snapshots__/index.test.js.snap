@@ -132,9 +132,9 @@ Object {
     Object {
       "position": Position {
         "end": Object {
-          "column": 183,
+          "column": 187,
           "line": 2,
-          "offset": 206,
+          "offset": 210,
         },
         "indent": Array [],
         "start": Object {
@@ -149,15 +149,15 @@ Object {
     Object {
       "position": Position {
         "end": Object {
-          "column": 29,
+          "column": 30,
           "line": 4,
-          "offset": 236,
+          "offset": 241,
         },
         "indent": Array [],
         "start": Object {
           "column": 1,
           "line": 4,
-          "offset": 208,
+          "offset": 212,
         },
       },
       "type": "html",
@@ -168,7 +168,7 @@ Object {
     "end": Object {
       "column": 1,
       "line": 5,
-      "offset": 237,
+      "offset": 242,
     },
     "start": Object {
       "column": 1,
