@@ -13,8 +13,10 @@ governing permissions and limitations under the License.
 const doNotLocalize = require('./src/DoNotLocalize');
 const admonitions = require('./src/Admonitions');
 const includeRelative = require('./src/IncludeRelative');
+const fixInvalidTags = require('./src/FixInvalidTags');
 
 module.exports = ({ markdownAST }, pluginOptions) => {
+  fixInvalidTags(markdownAST, pluginOptions);
   includeRelative(markdownAST, pluginOptions);
   doNotLocalize(markdownAST, pluginOptions);
   admonitions(markdownAST, pluginOptions);

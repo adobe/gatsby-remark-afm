@@ -43,8 +43,6 @@ function includeRelative(markdownAST, pluginOptions) {
                 .trim();
 
               const file = text.replace(match, filename);
-              // const fileAbsoluteDir = fileAbsolutePath.substring(0, fileAbsolutePath.lastIndexOf('/'));
-              // const path = normalizePath(`${fileAbsoluteDir}${file}`);
               const path = normalizePath(`${directory}${file}`);
 
               if (!fs.existsSync(path)) {

@@ -1,5 +1,379 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`fixInvalidTags can detect and fix these open HTML tags: br, hr, and img 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 24,
+              "line": 1,
+              "offset": 23,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 3,
+              "line": 1,
+              "offset": 2,
+            },
+          },
+          "type": "text",
+          "value": "SDS API Documentation",
+        },
+      ],
+      "depth": 1,
+      "position": Position {
+        "end": Object {
+          "column": 24,
+          "line": 1,
+          "offset": 23,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "type": "heading",
+    },
+    Object {
+      "position": Position {
+        "end": Object {
+          "column": 183,
+          "line": 2,
+          "offset": 206,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 2,
+          "offset": 24,
+        },
+      },
+      "type": "html",
+      "value": "<hr/><br/>This documentation describes SDS APIs, that can be broadly categorized into : Index, Ops, ResolveBy. For any questions please contact acp-cs-sds-engineering@adobe.com<br/><br/>",
+    },
+    Object {
+      "position": Position {
+        "end": Object {
+          "column": 29,
+          "line": 4,
+          "offset": 236,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 4,
+          "offset": 208,
+        },
+      },
+      "type": "html",
+      "value": "<img src=\\"images/image.png\\"/>",
+    },
+  ],
+  "position": Object {
+    "end": Object {
+      "column": 1,
+      "line": 5,
+      "offset": 237,
+    },
+    "start": Object {
+      "column": 1,
+      "line": 1,
+      "offset": 0,
+    },
+  },
+  "type": "root",
+}
+`;
+
+exports[`fixInvalidTags does nothing with the properly closed br, hr, and img tags in a markdown file 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 24,
+              "line": 1,
+              "offset": 23,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 3,
+              "line": 1,
+              "offset": 2,
+            },
+          },
+          "type": "text",
+          "value": "SDS API Documentation",
+        },
+      ],
+      "depth": 1,
+      "position": Position {
+        "end": Object {
+          "column": 24,
+          "line": 1,
+          "offset": 23,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "type": "heading",
+    },
+    Object {
+      "position": Position {
+        "end": Object {
+          "column": 187,
+          "line": 2,
+          "offset": 210,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 2,
+          "offset": 24,
+        },
+      },
+      "type": "html",
+      "value": "<hr/><br/>This documentation describes SDS APIs, that can be broadly categorized into : Index, Ops, ResolveBy. For any questions please contact acp-cs-sds-engineering@adobe.com<br/><br/>",
+    },
+    Object {
+      "position": Position {
+        "end": Object {
+          "column": 30,
+          "line": 4,
+          "offset": 241,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 4,
+          "offset": 212,
+        },
+      },
+      "type": "html",
+      "value": "<img src=\\"images/image.png\\"/>",
+    },
+  ],
+  "position": Object {
+    "end": Object {
+      "column": 1,
+      "line": 5,
+      "offset": 242,
+    },
+    "start": Object {
+      "column": 1,
+      "line": 1,
+      "offset": 0,
+    },
+  },
+  "type": "root",
+}
+`;
+
+exports[`fixInvalidTags works with a mix of properly closed and open br, hr, and img tags in a markdown file 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 24,
+              "line": 1,
+              "offset": 23,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 3,
+              "line": 1,
+              "offset": 2,
+            },
+          },
+          "type": "text",
+          "value": "SDS API Documentation",
+        },
+      ],
+      "depth": 1,
+      "position": Position {
+        "end": Object {
+          "column": 24,
+          "line": 1,
+          "offset": 23,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "type": "heading",
+    },
+    Object {
+      "position": Position {
+        "end": Object {
+          "column": 184,
+          "line": 2,
+          "offset": 207,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 2,
+          "offset": 24,
+        },
+      },
+      "type": "html",
+      "value": "<hr/><br/>This documentation describes SDS APIs, that can be broadly categorized into : Index, Ops, ResolveBy. For any questions please contact acp-cs-sds-engineering@adobe.com<br/><br/>",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 13,
+              "line": 4,
+              "offset": 221,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 4,
+              "offset": 209,
+            },
+          },
+          "type": "text",
+          "value": "Simple text.",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 13,
+          "line": 4,
+          "offset": 221,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 4,
+          "offset": 209,
+        },
+      },
+      "type": "paragraph",
+    },
+    Object {
+      "position": Position {
+        "end": Object {
+          "column": 46,
+          "line": 6,
+          "offset": 268,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 6,
+          "offset": 223,
+        },
+      },
+      "type": "html",
+      "value": "<img src=\\"images/image.png\\" alt=\\"my image\\" />",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "position": Position {
+            "end": Object {
+              "column": 27,
+              "line": 8,
+              "offset": 296,
+            },
+            "indent": Array [],
+            "start": Object {
+              "column": 1,
+              "line": 8,
+              "offset": 270,
+            },
+          },
+          "type": "text",
+          "value": "The caption for the image.",
+        },
+      ],
+      "position": Position {
+        "end": Object {
+          "column": 27,
+          "line": 8,
+          "offset": 296,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 8,
+          "offset": 270,
+        },
+      },
+      "type": "paragraph",
+    },
+    Object {
+      "position": Position {
+        "end": Object {
+          "column": 6,
+          "line": 10,
+          "offset": 303,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 10,
+          "offset": 298,
+        },
+      },
+      "type": "html",
+      "value": "<hr/>",
+    },
+    Object {
+      "position": Position {
+        "end": Object {
+          "column": 29,
+          "line": 12,
+          "offset": 333,
+        },
+        "indent": Array [],
+        "start": Object {
+          "column": 1,
+          "line": 12,
+          "offset": 305,
+        },
+      },
+      "type": "html",
+      "value": "<img src=\\"images/image.png\\"/>",
+    },
+  ],
+  "position": Object {
+    "end": Object {
+      "column": 1,
+      "line": 13,
+      "offset": 334,
+    },
+    "start": Object {
+      "column": 1,
+      "line": 1,
+      "offset": 0,
+    },
+  },
+  "type": "root",
+}
+`;
+
 exports[`includeRelative can detect and render include within markdown which itself has an include 1`] = `
 Object {
   "children": Array [
