@@ -45,6 +45,12 @@ describe('fixInvalidTags', () => {
 
     expect(processedAST).toMatchSnapshot();
   });
+  it('closes open tags in any included markdown files', async () => {
+    const markdownAST = getMarkdownASTForFile('markdown-include-with-open-tags', true);
+    const processedAST = await plugin({ markdownAST }, testOptions);
+
+    expect(processedAST).toMatchSnapshot();
+  });
 });
 
 describe('includeRelative', () => {
