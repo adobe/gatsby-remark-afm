@@ -16,14 +16,14 @@ const fixInvalidTags = require("../src/FixInvalidTags");
 // const tabbedCodeBlocks = require("../src/TabbedCodeBlocks");
 const {
   getMarkdownASTForFile,
-  parseASTToMarkdown
+  parseASTToMarkdown,
 } = require("./helpers/markdown");
 const plugin = require("../index");
 
 const path = require("path");
 const projectRootDir = path.dirname(__dirname);
 const testOptions = {
-  directory: `${projectRootDir}/tests/fixtures/`
+  directory: `${projectRootDir}/tests/fixtures/`,
 };
 
 describe("fixInvalidTags", () => {
@@ -211,6 +211,21 @@ describe("admonitions", () => {
       For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
 
       <Alert header=\\"Note\\" variant=\\"info\\">This is a standard NOTE block.</Alert>
+      "
+    `);
+  });
+  it("body with multiple paragraphs", async () => {
+    const markdownAST = getMarkdownASTForFile(
+      "admonitions-note-2-paragraphs",
+      true
+    );
+    const processedAST = await plugin({ markdownAST }, testOptions);
+    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
+      "# Don't Delete:
+
+      For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
+
+      <Alert header=\\"Note\\" variant=\\"info\\">This is a <a href=\\"https://example.com\\">website</a> NOTE block.<br/><br/>And after an empty line here's another line of text</Alert>
       "
     `);
   });

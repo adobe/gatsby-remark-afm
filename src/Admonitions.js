@@ -38,12 +38,17 @@ function admonitions(markdownAST, pluginOptions) {
           }
 
           if (html) {
-            if (children[1]) {
-              for (let i = 0; i < children[1].children.length; i++) {
-                if (children[1].children[i].type === "link") {
-                  html = `${html}<a href="${children[1].children[i].url}">${children[1].children[i].children[0].value}</a>`;
-                } else {
-                  html = `${html}${children[1].children[i].value}`;
+            if (children.length > 1) {
+              for (let j = 1; j < children.length; j++) {
+                for (let i = 0; i < children[j].children.length; i++) {
+                  if (children[j].children[i].type === "link") {
+                    html = `${html}<a href="${children[j].children[i].url}">${children[j].children[i].children[0].value}</a>`;
+                  } else {
+                    html = `${html}${children[j].children[i].value}`;
+                  }
+                }
+                if (children.length > 2 && j !== children.length - 1) {
+                  html = `${html}<br/><br/>`;
                 }
               }
               html = `${html}</Alert>`;
