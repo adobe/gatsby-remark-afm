@@ -21,18 +21,18 @@ function admonitions(markdownAST, pluginOptions) {
       children[0].children.length > 0
     ) {
       for (let i = 0; i < children[0].children.length; i++) {
-        if (children[0].children[i].type === "linkReference") {
-          switch (children[0].children[i].label) {
-            case "!NOTE":
+        if (children[0].children[i].type === "text") {
+          switch (children[0].children[i].value) {
+            case "[!NOTE]":
               html = `<Alert header="Note" variant="info">`
               break
-            case "!TIP":
+            case "[!TIP]":
               html = `<Alert header="Tip" variant="help">`
               break
-            case "!CAUTION":
+            case "[!CAUTION]":
               html = `<Alert header="Caution" variant="error">`
               break
-            case "!WARNING":
+            case "[!WARNING]":
               html = `<Alert header="Warning" variant="warning">`
               break
           }
