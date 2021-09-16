@@ -63,6 +63,7 @@ This option is required to resolve the plugin's include feature `{% include_rela
 
 Adding this directory path ensures that the plugin can find your site's markdown files to include. All markdown files in sub-directories of the `directory` path will also be processed and made available as needed.
 
+
 ## License
 
 [Apache-2.0](LICENSE)
