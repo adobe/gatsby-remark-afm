@@ -22,19 +22,14 @@ function admonitions(markdownAST, pluginOptions) {
     ) {
       for (let i = 0; i < children[0].children.length; i++) {
         if (children[0].children[i].type === "text") {
-          switch (children[0].children[i].value) {
-            case "[!NOTE]":
-              html = `<Alert header="Note" variant="info">`
-              break
-            case "[!TIP]":
-              html = `<Alert header="Tip" variant="help">`
-              break
-            case "[!CAUTION]":
-              html = `<Alert header="Caution" variant="error">`
-              break
-            case "[!WARNING]":
-              html = `<Alert header="Warning" variant="warning">`
-              break
+          if(children[0].children[i].value.includes("[!NOTE]")) {
+            html = children[0].children[i].value.replace("[!NOTE]", `<Alert header="Note" variant="info">`)
+          } else if(children[0].children[i].value.includes("[!TIP]")) {
+            html = children[0].children[i].value.replace("[!TIP]", `<Alert header="Tip" variant="help">`)
+          } else if(children[0].children[i].value.includes("[!CAUTION]")) {
+            html = children[0].children[i].value.replace("[!CAUTION]", `<Alert header="Caution" variant="error">`)
+          }else if(children[0].children[i].value.includes("[!WARNING]")) {
+            html = children[0].children[i].value.replace("[!WARNING]", `<Alert header="Warning" variant="warning">`)
           }
 
           if (html) {

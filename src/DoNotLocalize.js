@@ -13,11 +13,11 @@ const visit = require('unist-util-visit');
 const toString = require('mdast-util-to-string');
 
 function doNotLocalize(markdownAST, pluginOptions) {
-  visit(markdownAST, 'linkReference', (node) => {
-    if (node.label.includes('!DNL')) {
+  visit(markdownAST, 'text', (node) => {
+    if (node.value.includes('[!DNL')) {
       let text = toString(node);
       node.type = `text`;
-      node.value = text.replace('!DNL', '').trim();
+      node.value = text.replace('[!DNL', '').trim().replace(']','').trim();
       node.children = undefined;
     }
   });
