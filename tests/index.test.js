@@ -264,4 +264,19 @@ describe("admonitions", () => {
       "
     `)
   })
+  it("body with inline image", async () => {
+    const markdownAST = getMarkdownASTForFile(
+      "admonitions-note-inline-img",
+      true
+    )
+    const processedAST = await plugin({ markdownAST }, testOptions)
+    expect(parseASTToMarkdown(processedAST)).toMatchInlineSnapshot(`
+      "# Don't Delete:
+
+      For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
+
+      <Alert header=\\"Note\\" variant=\\"info\\">This is an <img src=\\"images/image.png\\" alt=\\"inline image\\"> <img src=\\"images/image-empty-alt.png\\" alt=\\"\\"> NOTE block.</Alert>
+      "
+    `)
+  })
 })

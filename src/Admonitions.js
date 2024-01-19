@@ -36,7 +36,9 @@ function admonitions(markdownAST, pluginOptions) {
             if (children.length > 1) {
               for (let j = 1; j < children.length; j++) {
                 for (let i = 0; i < children[j].children.length; i++) {
-                  if (children[j].children[i].type === "link") {
+                  if (children[j].children[i].type === "image") {
+                    html = `${html}<img src="${children[j].children[i].url}" alt="${children[j].children[i].alt}">`
+                  } else if (children[j].children[i].type === "link") {
                     html = `${html}<a href="${children[j].children[i].url}">${children[j].children[i].children[0].value}</a>`
                   } else if (children[j].children[i].type === "strong") {
                     html = `${html}<b>${children[j].children[i].children[0].value}</b>`
