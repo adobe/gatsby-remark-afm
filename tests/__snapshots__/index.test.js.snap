@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`admonitions body with code snippet 1`] = `
+"# Don't Delete:
+
+For some reason we need at least one markdown file in the markdown-pages directory in order for the build to succeed
+
+<Alert header=\\"Note\\" variant=\\"info\\">The following code snippet shows a function called <code>greeting</code>:<pre lang=\\"javascript\\"><code>function greeting() {
+  console.log(\\"Hello world!\\");
+}</code></pre></Alert>
+"
+`;
+
 exports[`fixInvalidTags can detect and fix these open HTML tags: br, hr, and img 1`] = `
 Object {
   "children": Array [
