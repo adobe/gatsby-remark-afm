@@ -279,4 +279,12 @@ describe("admonitions", () => {
       "
     `)
   })
+  it("body with code snippet", async () => {
+    const markdownAST = getMarkdownASTForFile(
+      "admonitions-note-code-snippet",
+      true
+    )
+    const processedAST = await plugin({ markdownAST }, testOptions)
+    expect(parseASTToMarkdown(processedAST)).toMatchSnapshot()
+  })
 })

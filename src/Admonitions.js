@@ -35,6 +35,10 @@ function admonitions(markdownAST, pluginOptions) {
           if (html) {
             if (children.length > 1) {
               for (let j = 1; j < children.length; j++) {
+                if (children[j].type === 'code') {
+                  html = `${html}<pre${children[j].lang ? ` lang="${children[j].lang}"` : ''}><code>${children[j].value}</code></pre>`
+                  continue
+                }
                 for (let i = 0; i < children[j].children.length; i++) {
                   if (children[j].children[i].type === "image") {
                     html = `${html}<img src="${children[j].children[i].url}" alt="${children[j].children[i].alt}">`
@@ -50,7 +54,7 @@ function admonitions(markdownAST, pluginOptions) {
                     html = `${html}${children[j].children[i].value}`
                   }
                 }
-                if (children.length > 2 && j !== children.length - 1) {
+                if (children.length > 2 && j !== children.length - 1 && children[j + 1].type !== 'code') {
                   html = `${html}<br/><br/>`
                 }
               }
